@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FinalConveyanceController;
 use App\Http\Controllers\CommissionNewSTController;
 use App\Http\Controllers\GroupingDashboardController;
+use App\Http\Controllers\ScanUploadsController;
 use App\Http\Controllers\STFileNumberController;
 
 /*
@@ -32,6 +33,15 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('grouping-analytics')->name('grouping-analytics.')->group(function () {
         Route::get('/', [GroupingDashboardController::class, 'index'])->name('dashboard');
         Route::get('/data', [GroupingDashboardController::class, 'data'])->name('data');
+    });
+
+    // Scan Uploads routes (full CRUD + logging + debug)
+    Route::prefix('scan-uploads')->name('scan-uploads.')->group(function () {
+        Route::get('/', [ScanUploadsController::class, 'index'])->name('index');
+        Route::get('/log', [ScanUploadsController::class, 'log'])->name('log');
+        Route::post('/upload', [ScanUploadsController::class, 'upload'])->name('upload');
+        Route::delete('/{scan}', [ScanUploadsController::class, 'destroy'])->name('destroy');
+        Route::get('/debug', [ScanUploadsController::class, 'debug'])->name('debug');
     });
 
     // Commission New ST Routes

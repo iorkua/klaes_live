@@ -220,12 +220,12 @@
       </div>
 
       <div class="pl-4 mt-1 mb-1 space-y-0.5 hidden" data-content="scanning">
-      <a href="{{route('scanning.index')}}" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('scanning.index') ? 'active' : '' }}">
+      <a href="{{route('scan-uploads.index')}}" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('scan-uploads.index') ? 'active' : '' }}">
       <i data-lucide="upload" class="h-3.5 w-3.5 text-emerald-400"></i>
       <span>Upload Indexed Files</span>
       </a>
 
-      <a href="http://klaes.com.ng/scanning/unindexed" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+      <a href="http://klaes.com.ng/scanning/unindexed" class="sidebar-item disabled flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200"></a>
       <i data-lucide="upload" class="h-3.5 w-3.5 text-emerald-400"></i>
       <span>Upload Unindexed Files</span>
       </a>
