@@ -1,0 +1,78 @@
+@extends('layouts.app')
+
+@section('page-title')
+{{ __('Blind Scannings') }}
+@endsection
+
+@push('styles')
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"/>
+  <link rel="stylesheet" href="{{ asset('css/global-fileno-modal.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/blind-scanning.css') }}">
+@endpush
+
+@push('scripts')
+  <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
+@endpush
+
+@php
+// This page uses Laravel controllers for backend functionality
+@endphp
+
+@section('content')
+<div class="flex-1 overflow-auto">
+    <!-- Header -->
+    @include('admin.header')
+    <!-- Dashboard Content -->
+    <div class="p-4 sm:p-6">
+        <div class="container mx-auto py-8 space-y-8">
+            <!-- Header Section -->
+            @include('scanning.partials.header')
+
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-6">
+                <!-- Left: Upload + Migrate (reduced width) -->
+                <div class="lg:col-span-2">
+                    @include('scanning.partials.upload-section')
+                </div>
+
+                <!-- Right: Server Browser & Logs (increased width) -->
+                <div class="lg:col-span-3">
+                    @include('scanning.partials.server-section')
+                </div>
+            </div>
+
+            <!-- Records Table Section -->
+            @include('scanning.partials.records-section')
+
+            <!-- Progress Modal -->
+            @include('scanning.partials.progress-modal')
+
+            <!-- Include Global File Number Modal -->
+            @include('components.global-fileno-modal')
+            
+            <!-- Footer -->
+            @include('admin.footer')
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+  <!-- Global File Number Modal JavaScript -->
+  <script src="{{ asset('js/global-fileno-modal.js') }}"></script>
+  <script src="{{ asset('js/blind-scanning.js') }}"></script>
+  <script>
+    // Initialize Blind Scanning Manager
+    document.addEventListener('DOMContentLoaded', function() {
+      // Configuration
+      const config = {
+        MIGRATE_ENDPOINT: '{{ route("blind_scan.migrate") }}',
+        API_LIST: '{{ route("blind_scan.api.list") }}',
+        API_LOGS: '{{ route("blind_scan.api.logs") }}'
+      };
+
+      // Initialize the Blind Scanning Manager
+      window.blindScanManager = new BlindScanningManager(config);
+    });
+  </script>
+@endpush
