@@ -93,9 +93,9 @@
         <i data-lucide="users" class="h-4 w-4 text-green-500"></i>
         <span>Group</span>
         </a>
-        <a href="/person/family" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
-        <i data-lucide="users-2" class="h-4 w-4 text-green-500"></i>
-        <span>Family</span>
+        <a href="/person/multiple-owners" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+        <i data-lucide="users-round" class="h-4 w-4 text-green-500"></i>
+        <span>Multiple Owners</span>
         </a>
       </div>
       @endif
@@ -159,7 +159,10 @@
           <i data-lucide="file-search" class="h-3.5 w-3.5 text-emerald-400"></i>
           <span>File Indexing Assistant</span>
         </a>
-
+       <a href="#" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+          <i data-lucide="eye" class="h-3.5 w-3.5 text-emerald-400"></i>
+          <span>File Index View</span>
+        </a>
         @if($hasRole('File SerialNo Grouping') || $hasRole('SerialNo Grouping') || $hasRole('Print File Labels'))
         <div class="sidebar-submodule-header flex items-center justify-between py-1.5 px-3 cursor-pointer rounded-md" data-section="serialNoGrouping">
           <div class="flex items-center gap-2">
@@ -641,6 +644,36 @@
         <span>Property Records Assistant (Legacy Records)</span>
       </a>
       @endif
+
+	
+
+      
+      <div class="sidebar-submodule-header flex items-center justify-between py-1.5 px-3 cursor-pointer rounded-md" data-section="propertyIndexCards">
+        <div class="flex items-center gap-2">
+          <i data-lucide="clipboard" class="h-4 w-4 text-teal-500"></i>
+          <span>Property Index Cards Assistant (Legacy Records)</span>
+        </div>
+        <i data-lucide="chevron-right" class="h-4 w-4 transition-transform duration-200" data-chevron="propertyIndexCards"></i>
+      </div>
+
+      <div class="pl-4 mt-1 mb-1 space-y-0.5 hidden" data-content="propertyIndexCards">
+        <a href="" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+          <i data-lucide="sparkles" class="h-3.5 w-3.5 text-teal-400"></i>
+          <span>Property Records Assistant (Legacy Records)</span>
+        </a>
+        
+        <a href="#" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+          <i data-lucide="eye" class="h-3.5 w-3.5 text-teal-400"></i>
+          <span>Property Index Card View</span>
+        </a>
+      </div>
+    @if($hasRole('AI PRA (File Transactions)'))
+    <a href="/deeds/ai-pra-file-transactions" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200">
+      <i data-lucide="bot" class="h-3.5 w-3.5 text-teal-400"></i>
+      <span>AI PRA (File Transactions)</span>
+    </a>
+    @endif
+
       @if($hasRole('Deeds - Instrument Capture (New Records)'))
       <a href="{{route('instruments.index')}}" class="sidebar-item flex items-center gap-2 py-2 px-3 rounded-md transition-all duration-200 {{ request()->routeIs('instruments.index') ? 'active' : '' }}">
         <i data-lucide="file-input" class="h-4 w-4 text-teal-500"></i>
